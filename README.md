@@ -169,13 +169,15 @@ browser project with a tag manually, e.g. `playwright test --project=firefox --g
 
 ## 📊 Reporting
 
+- **Live Allure report** — published to GitHub Pages on every push to `main`:
+  **https://darkshakti.github.io/sauce-demo-tests/**
 - **Playwright HTML report** — `npm run report` (auto-generated under `playwright-report/`).
-- **Allure** — `npm run allure:serve` for a polished, history-aware dashboard.
+- **Allure** — `npm run allure:serve` for a polished, history-aware dashboard locally.
 - On failure Playwright captures a **screenshot**, **video** and a **trace** (open with
   `npx playwright show-trace <trace.zip>`).
 
-In CI, both the HTML report and a merged Allure report are uploaded as downloadable artifacts
-on every run.
+In CI, the Playwright HTML report and the merged Allure report are uploaded as downloadable
+artifacts on every run; on `main` the Allure report is also deployed to GitHub Pages (link above).
 
 ---
 
@@ -188,6 +190,7 @@ pull request to `main`/`master` (Node 22) as three staged jobs:
 2. **`Smoke + Regression`** — `needs: smoke`; once the gate is green, runs the **full suite** across
    **chromium / firefox / webkit** in parallel (each job installs only its own browser).
 3. **`Publish Allure report`** — merges the per-browser Allure results into a single report artifact.
+4. **`Deploy Allure report to GitHub Pages`** — on `main`, publishes that report to GitHub Pages.
 
 This fail-fast layout avoids spending the 3-browser matrix when a basic smoke check is already broken.
 HTML reports (smoke + per-browser) and the merged Allure report are uploaded as downloadable artifacts.
