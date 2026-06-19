@@ -13,9 +13,9 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -33,7 +33,7 @@ jobs:
 
       - name: Upload smoke HTML report
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report-smoke
           path: playwright-report/
@@ -51,9 +51,9 @@ jobs:
         project: [chromium, firefox, webkit]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
@@ -69,7 +69,7 @@ jobs:
 
       - name: Upload HTML report
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report-${{ matrix.project }}
           path: playwright-report/
@@ -77,7 +77,7 @@ jobs:
 
       - name: Upload Allure results
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-results-${{ matrix.project }}
           path: allure-results/
@@ -89,21 +89,21 @@ jobs:
     needs: regression
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Download all Allure results
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: allure-results-*
           path: allure-results
           merge-multiple: true
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
 
-      - uses: actions/setup-java@v4 # Allure CLI is a JVM tool
+      - uses: actions/setup-java@v5 # Allure CLI is a JVM tool
         with:
           distribution: temurin
           java-version: 21
@@ -115,7 +115,7 @@ jobs:
         run: npx allure generate allure-results --clean -o allure-report
 
       - name: Upload Allure report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: allure-report
           path: allure-report/
@@ -135,16 +135,16 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Download the generated Allure report
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: allure-report
           path: allure-report
 
       - name: Upload to GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: allure-report
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
