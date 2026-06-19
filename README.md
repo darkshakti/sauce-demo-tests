@@ -31,6 +31,7 @@ execution, **CI/CD** on every push, and rich **HTML + Allure** reporting.
 | **Reporting**         | Playwright HTML report + Allure report; screenshots, video & trace on failure.                          |
 | **Test tiers**        | `@smoke` (fast critical path) and `@regression` (full coverage) tags.                                   |
 | **Typed test data**   | Centralised users / products / errors in [`fixtures/test-data.ts`](fixtures/test-data.ts).              |
+| **Test strategy**     | A master [`TEST-PLAN.md`](TEST-PLAN.md): scope, approach, environment, entry/exit criteria, risks.       |
 | **Test design**       | Documented test cases by module in [`test-cases/`](test-cases/README.md), cross-linked to the specs.    |
 | **Traceability**      | Each spec title carries its case ID (`[AUTH-01]` … `[CHK-04]`), mapping tests ↔ documented cases.       |
 | **Pinned toolchain**  | Exact dependency versions + committed lockfile; `npm ci` gives reproducible installs.                   |
@@ -65,6 +66,7 @@ sauce-demo/
 │  ├─ inventory.md
 │  ├─ cart.md
 │  └─ checkout.md
+├─ TEST-PLAN.md               # master test plan (scope, strategy, criteria, risks)
 ├─ .github/workflows/
 │  └─ playwright.yml          # CI pipeline (3 browsers + Allure)
 ├─ docs/                      # screenshots / demo GIF

@@ -4,6 +4,9 @@ Manually designed test cases for [SauceDemo](https://www.saucedemo.com), organis
 This is the **test-design** artifact behind the automated suite: it documents the full coverage
 intent, while the [`tests/`](../tests) folder automates the highest-value subset.
 
+The strategy layer above these cases — scope, approach, environment, entry/exit criteria and
+risks — lives in the master [`TEST-PLAN.md`](../TEST-PLAN.md).
+
 Each case is cross-referenced to its automated spec (when automated), so a reviewer can see both
 _what is tested_ and _how it maps to code_.
 
